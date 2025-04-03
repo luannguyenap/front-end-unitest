@@ -1,7 +1,12 @@
 import { PaymentMethod } from "../models/payment.model";
 import { Order } from '../models/order.model';
 
-export class PaymentService {
+export interface IPaymentService {
+  buildPaymentMethod(totalPrice: number): string;
+  payViaLink(order: Order): void;
+}
+
+export class PaymentService implements IPaymentService{
   private readonly PAYMMENT_METHODS = [
     PaymentMethod.CREDIT,
     PaymentMethod.PAYPAY,
